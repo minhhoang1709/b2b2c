@@ -73,6 +73,11 @@ public class PaintDto {
 	public void setPaintSupplierId(int paintSupplierId) {
 		this.paintSupplierId = paintSupplierId;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "PaintDto [paintId=" + paintId + ", paintName=" + paintName + ", paintBrand=" + paintBrand
+				+ ", paintColorCode=" + paintColorCode + ", paintWeight=" + paintWeight + ", paintPrice=" + paintPrice
+				+ ", paintCount=" + paintCount + ", paintSupplierId=" + paintSupplierId + "]";
+	}
 }

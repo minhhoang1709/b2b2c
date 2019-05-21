@@ -8,4 +8,7 @@ import b2b2c.model.UserCouponModel;
 @Repository
 public interface UserCouponRepository extends JpaRepository<UserCouponModel, Integer> {
 
+	public UserCouponModel findByCouponCode(String couponCode);
+
+	int countByCouponCode(String couponCode);
 }

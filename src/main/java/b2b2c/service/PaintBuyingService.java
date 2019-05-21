@@ -1,43 +1,55 @@
 package b2b2c.service;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import b2b2c.dto.CouponDto;
 import b2b2c.dto.PaintDto;
 import b2b2c.model.CouponModel;
-import b2b2c.model.PaintModel;
-import b2b2c.repository.CouponRepository;
+import b2b2c.util.B2b2cModelMapper;
 
 @Service
 public class PaintBuyingService {
-	private static final ModelMapper modelMapper = new ModelMapper();
-	
-	@Autowired
-	private CouponRepository couponRepository;
-	
+
 	@Autowired
 	private PaintService paintService;
-	
-	public CouponDto getCouponByCode(String couponCode) {
-		CouponDto couponDto = new CouponDto();
-		couponDto.setCouponCode(couponCode);
-		CouponModel couponModel = couponRepository.findByCouponCode(couponCode);
-		couponDto = convertToDto(couponModel);
-		return couponDto;
-	}
-	
-	public PaintDto getPaintDtoByCouponCode(String couponCode) {
+
+	@Autowired
+	private B2b2cModelMapper b2b2cModelMapper;
+
+	@Autowired
+	private CouponService couponService;
+
+	@Autowired
+	private UserCouponService userCouponService;
+
+	public PaintDto getPaintDtoByInviteCode(String couponCode) {
 		PaintDto paintDto = new PaintDto();
-		CouponModel couponModel = couponRepository.findByCouponCode(couponCode);
-		paintDto = paintService.getPaintById(couponModel.getCouponPaintId());
-		
-		return paintDto;
+
+		CouponModel couponModel = couponService.getInviteByCode(couponCode);
+		CouponDto couponDto = b2b2cModelMapper.convertToDto(couponModel);
+		if (couponDto != null) {
+			paintDto = paintService.getPaintById(couponDto.getCouponPaintId());
+			paintDto.setPaintPrice(0);
+			return paintDto;
+
+		} else {
+			return null;
+		}
+
 	}
-	
-	private CouponDto convertToDto(CouponModel couponModel) {
-		CouponDto couponDto = modelMapper.map(couponModel, CouponDto.class);
-		return couponDto;
+
+	public boolean acceptInviteCode(String couponCode, int userId) {
+
+		CouponModel couponModel = couponService.getInviteByCode(couponCode);
+		PaintDto paintDto = getPaintDtoByInviteCode(couponCode);
+		if (couponModel != null) {
+			userCouponService.insertUserCoupon(couponModel, userId);
+			paintService.addToCartByInvite(paintDto, couponModel);
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 }

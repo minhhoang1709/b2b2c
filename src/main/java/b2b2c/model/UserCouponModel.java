@@ -1,7 +1,5 @@
 package b2b2c.model;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,22 +14,16 @@ public class UserCouponModel {
 	private int userId;
 
 	@Column(name = "usercoupon_code")
-	private String code;
+	private String couponCode;
 
 	@Column(name = "coupon_id")
 	private int couponId;
 
-	@Column(name = "coupon_status")
-	private boolean couponStatus;
-
 	@Column(name = "coupon_started_date")
-	private LocalDateTime couponStartedDate;
+	private String couponStartedDate;
 
 	@Column(name = "coupon_exprired_date")
-	private LocalDateTime couponExpriredDate;
-
-	@Column(name = "coupon_is_invite")
-	private boolean couponIsInvite;
+	private String couponExpriredDate;
 
 	@Column(name = "coupon_product_count")
 	private byte couponProductCount;
@@ -40,15 +32,13 @@ public class UserCouponModel {
 
 	}
 
-	public UserCouponModel(int userId, String code, int couponId, boolean couponStatus, LocalDateTime couponStartedDate,
-			LocalDateTime couponExpriredDate, boolean couponIsInvite, byte couponProductCount) {
+	public UserCouponModel(int userId, String couponCode, int couponId, String couponStartedDate,
+			String couponExpriredDate, byte couponProductCount) {
 		this.userId = userId;
-		this.code = code;
+		this.couponCode = couponCode;
 		this.couponId = couponId;
-		this.couponStatus = couponStatus;
 		this.couponStartedDate = couponStartedDate;
 		this.couponExpriredDate = couponExpriredDate;
-		this.couponIsInvite = couponIsInvite;
 		this.couponProductCount = couponProductCount;
 	}
 
@@ -60,12 +50,12 @@ public class UserCouponModel {
 		this.userId = userId;
 	}
 
-	public String getCode() {
-		return code;
+	public String getCouponCode() {
+		return couponCode;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setCouponCode(String couponCode) {
+		this.couponCode = couponCode;
 	}
 
 	public int getCouponId() {
@@ -76,36 +66,20 @@ public class UserCouponModel {
 		this.couponId = couponId;
 	}
 
-	public boolean isCouponStatus() {
-		return couponStatus;
-	}
-
-	public void setCouponStatus(boolean couponStatus) {
-		this.couponStatus = couponStatus;
-	}
-
-	public LocalDateTime getCouponStartedDate() {
+	public String getCouponStartedDate() {
 		return couponStartedDate;
 	}
 
-	public void setCouponStartedDate(LocalDateTime couponStartedDate) {
+	public void setCouponStartedDate(String couponStartedDate) {
 		this.couponStartedDate = couponStartedDate;
 	}
 
-	public LocalDateTime getCouponExpriredDate() {
+	public String getCouponExpriredDate() {
 		return couponExpriredDate;
 	}
 
-	public void setCouponExpriredDate(LocalDateTime couponExpriredDate) {
+	public void setCouponExpriredDate(String couponExpriredDate) {
 		this.couponExpriredDate = couponExpriredDate;
-	}
-
-	public boolean isCouponIsInvite() {
-		return couponIsInvite;
-	}
-
-	public void setCouponIsInvite(boolean couponIsInvite) {
-		this.couponIsInvite = couponIsInvite;
 	}
 
 	public byte getCouponProductCount() {
