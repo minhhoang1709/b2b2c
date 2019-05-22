@@ -24,4 +24,9 @@ public class B2b2cModelMapper {
 		UserDto userDto = modelMapper.map(userModel, UserDto.class);
 		return userDto;
 	}
+	
+	public CartDto convertToDto(CartModel cartModel) {
+		CartDto cartDto = modelMapper.map(cartModel, CartDto.class);
+		return cartDto;
+	}
 }

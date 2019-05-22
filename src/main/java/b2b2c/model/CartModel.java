@@ -12,7 +12,7 @@ public class CartModel {
 	private int cartItemId;
 
 	@Column(name = "cart_order_id")
-	private int cartOderId;
+	private int cartOrderId;
 
 	@Column(name = "cart_paint_id")
 	private int cartPaintId;
@@ -36,10 +36,10 @@ public class CartModel {
 
 	}
 
-	public CartModel(int cartItemId, int cartOderId, int cartPaintId, String cartPaintName, int cartPaintQuantity, int cartCouponId,
+	public CartModel(int cartItemId, int cartOrderId, int cartPaintId, String cartPaintName, int cartPaintQuantity, int cartCouponId,
 			String cartCouponTitle, int cartPaintFinalPrice) {
 		this.cartItemId = cartItemId;
-		this.cartOderId = cartOderId;
+		this.cartOrderId = cartOrderId;
 		this.cartPaintId = cartPaintId;
 		this.cartPaintName = cartPaintName;
 		this.cartPaintQuantity = cartPaintQuantity;
@@ -57,11 +57,11 @@ public class CartModel {
 	}
 
 	public int getCartOderId() {
-		return cartOderId;
+		return cartOrderId;
 	}
 
 	public void setCartOderId(int cartOderId) {
-		this.cartOderId = cartOderId;
+		this.cartOrderId = cartOderId;
 	}
 
 	public int getCartPaintId() {

@@ -54,7 +54,14 @@ public class CouponService {
 		}
 	}
 	
-	
-	
+	public CouponModel getCouponByCodev2(String couponCode) {
+		CouponModel couponModel = couponRepository.findByCouponCode(couponCode);
+		if(couponModel.isCouponIsInvite()==false&&couponModel.isCouponStatus()==true
+				&&checkValidDateCoupon(couponModel)==true&&userCouponService.checkExist(couponCode)==true) {
+			return couponModel;
+		}else {
+			return null;
+		}
+	}
 	
 }

@@ -16,29 +16,41 @@ public class PaintService {
 
 	@Autowired
 	private PaintRepository paintRepository;
-	
+
 	@Autowired
 	private B2b2cModelMapper b2b2cModelMapper;
-	
+
 	@Autowired
 	private CartRepository cartRepository;
-	
+
 	public PaintDto getPaintById(int paintId) {
 		PaintModel paintModel = paintRepository.findOne(paintId);
 		PaintDto paintDto = b2b2cModelMapper.convertToDto(paintModel);
 		return paintDto;
 	}
-	
-	public void addToCartByInvite(PaintDto paintDto, CouponModel couponModel) {
+
+	public void addToCartByInvite(PaintDto paintDto, CouponModel couponModel, int orderId) {
 		CartModel cartModel = new CartModel();
 		cartModel.setCartItemId(paintDto.getPaintId());
 		cartModel.setCartPaintQuantity(couponModel.getCouponProductCount());
 		cartModel.setCartCouponId(couponModel.getCouponId());
 		cartModel.setCartCouponTitle(couponModel.getCouponTitle());
-		cartModel.setCartOderId(1);
+		cartModel.setCartOderId(orderId);
 		cartModel.setCartPaintFinalPrice(paintDto.getPaintPrice());
 		cartModel.setCartPaintName(paintDto.getPaintName());
+
+		cartRepository.save(cartModel);
+	}
+
+	public void addToCart(int paintId, int paintQuantity, int orderId) {
 		
+		PaintModel paintModel = paintRepository.findOne(paintId);
+		CartModel cartModel = new CartModel();
+		cartModel.setCartPaintId(paintModel.getPaintId());
+		cartModel.setCartOderId(orderId);
+		cartModel.setCartPaintFinalPrice(paintModel.getPaintPrice());
+		cartModel.setCartPaintName(paintModel.getPaintName());
+		cartModel.setCartPaintQuantity(paintQuantity);
 		cartRepository.save(cartModel);
 	}
 }

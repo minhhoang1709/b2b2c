@@ -13,6 +13,9 @@ public class PaintBuyingService {
 
 	@Autowired
 	private PaintService paintService;
+	
+	@Autowired
+	private CartService cartService;
 
 	@Autowired
 	private B2b2cModelMapper b2b2cModelMapper;
@@ -39,17 +42,30 @@ public class PaintBuyingService {
 
 	}
 
-	public boolean acceptInviteCode(String couponCode, int userId) {
+	public boolean acceptInviteCode(String couponCode, int userId, int orderId) {
 
 		CouponModel couponModel = couponService.getInviteByCode(couponCode);
 		PaintDto paintDto = getPaintDtoByInviteCode(couponCode);
 		if (couponModel != null) {
 			userCouponService.insertUserCoupon(couponModel, userId);
-			paintService.addToCartByInvite(paintDto, couponModel);
+			paintService.addToCartByInvite(paintDto, couponModel, orderId);
 			return true;
 		} else {
 			return false;
 		}
 
 	}
+	
+	public boolean acceptCoupon(String couponCode, int paintId, int userId, int orderId) {
+		
+		CouponModel couponModel = couponService.getCouponByCodev2(couponCode);
+		if (couponModel != null) {
+			userCouponService.insertUserCoupon(couponModel, userId);
+			cartService.updateCart(paintId, couponModel, orderId);
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 }
