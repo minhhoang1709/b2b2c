@@ -4,7 +4,7 @@ public class OrderDto {
 	
 	private int orderUserId;
 	private int orderTotal;
-	private int orderDeliveryAddress;
+	private String orderDeliveryAddress;
 	private String orderCustomerFullname;
 	private String orderCustomerPhone;
 	private String orderNotes;
@@ -13,7 +13,7 @@ public class OrderDto {
 		
 	}
 	
-	public OrderDto(int orderUserId, int orderTotal, int orderDeliveryAddress, String orderCustomerFullname,
+	public OrderDto(int orderUserId, int orderTotal, String orderDeliveryAddress, String orderCustomerFullname,
 			String orderCustomerPhone, String orderNotes) {
 		this.orderUserId = orderUserId;
 		this.orderTotal = orderTotal;
@@ -34,10 +34,10 @@ public class OrderDto {
 	public void setOrderTotal(int orderTotal) {
 		this.orderTotal = orderTotal;
 	}
-	public int getOrderDeliveryAddress() {
+	public String getOrderDeliveryAddress() {
 		return orderDeliveryAddress;
 	}
-	public void setOrderDeliveryAddress(int orderDeliveryAddress) {
+	public void setOrderDeliveryAddress(String orderDeliveryAddress) {
 		this.orderDeliveryAddress = orderDeliveryAddress;
 	}
 	public String getOrderCustomerFullname() {

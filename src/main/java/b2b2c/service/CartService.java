@@ -47,4 +47,12 @@ public class CartService {
 		}
 		return cartDtoList;
 	}
+	
+	public void deleteCart(int cartOrderId) {
+		cartRepository.deleteByCartOrderId(cartOrderId);
+	}
+	
+	public void removeItem(int cartItemId) {
+		cartRepository.deleteByCartItemId(cartItemId);
+	}
 }

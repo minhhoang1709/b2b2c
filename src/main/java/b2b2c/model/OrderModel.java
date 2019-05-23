@@ -14,13 +14,16 @@ public class OrderModel{
 	private int orderUserId;
 	
 	@Column(name="order_created_date")
-	private int orderCreatedDate;
+	private String orderCreatedDate;
+	
+	@Column(name="order_ordered_date")
+	private String orderOderedDate;
 	
 	@Column(name="order_total")
 	private int orderTotal;
 	
 	@Column(name="order_delivery_address")
-	private int orderDeliveryAddress;
+	private String orderDeliveryAddress;
 	
 	@Column(name="order_customer_fullname")
 	private String orderCustomerFullname;
@@ -31,20 +34,25 @@ public class OrderModel{
 	@Column(name="order_notes")
 	private String orderNotes;
 	
+	@Column(name="order_status")
+	private boolean orderStatus;
+	
 	public OrderModel() {
 		
 	}
 
-	public OrderModel(int orderId, int orderUserId, int orderCreatedDate, int orderTotal, int orderDeliveryAddress,
-			String orderCustomerFullname, String orderCustomerPhone, String orderNotes) {
+	public OrderModel(int orderId, int orderUserId, String orderCreatedDate, String orderOderedDate, int orderTotal, String orderDeliveryAddress,
+			String orderCustomerFullname, String orderCustomerPhone, String orderNotes, boolean orderStatus) {
 		this.orderId = orderId;
 		this.orderUserId = orderUserId;
 		this.orderCreatedDate = orderCreatedDate;
+		this.orderOderedDate = orderOderedDate;
 		this.orderTotal = orderTotal;
 		this.orderDeliveryAddress = orderDeliveryAddress;
 		this.orderCustomerFullname = orderCustomerFullname;
 		this.orderCustomerPhone = orderCustomerPhone;
 		this.orderNotes = orderNotes;
+		this.orderStatus = orderStatus;
 	}
 
 	public int getOrderId() {
@@ -63,12 +71,20 @@ public class OrderModel{
 		this.orderUserId = orderUserId;
 	}
 
-	public int getOrderCreatedDate() {
+	public String getOrderCreatedDate() {
 		return orderCreatedDate;
 	}
 
-	public void setOrderCreatedDate(int orderCreatedDate) {
+	public void setOrderCreatedDate(String orderCreatedDate) {
 		this.orderCreatedDate = orderCreatedDate;
+	}
+
+	public String getOrderOderedDate() {
+		return orderOderedDate;
+	}
+
+	public void setOrderOderedDate(String orderOderedDate) {
+		this.orderOderedDate = orderOderedDate;
 	}
 
 	public int getOrderTotal() {
@@ -79,11 +95,11 @@ public class OrderModel{
 		this.orderTotal = orderTotal;
 	}
 
-	public int getOrderDeliveryAddress() {
+	public String getOrderDeliveryAddress() {
 		return orderDeliveryAddress;
 	}
 
-	public void setOrderDeliveryAddress(int orderDeliveryAddress) {
+	public void setOrderDeliveryAddress(String orderDeliveryAddress) {
 		this.orderDeliveryAddress = orderDeliveryAddress;
 	}
 
@@ -110,5 +126,12 @@ public class OrderModel{
 	public void setOrderNotes(String orderNotes) {
 		this.orderNotes = orderNotes;
 	}
-	
+
+	public boolean isOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(boolean orderStatus) {
+		this.orderStatus = orderStatus;
+	}
 }

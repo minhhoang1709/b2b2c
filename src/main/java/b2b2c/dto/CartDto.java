@@ -1,6 +1,7 @@
 package b2b2c.dto;
 
 public class CartDto {
+	private int cartItemId;
 	private String cartPaintName;
 	private int cartPaintQuantity;
 	private String cartCouponTitle;
@@ -10,12 +11,22 @@ public class CartDto {
 		
 	}
 	
-	public CartDto(String cartPaintName, int cartPaintQuantity, String cartCouponTitle, int cartPaintFinalPrice) {
+	public CartDto(int cartItemId, String cartPaintName, int cartPaintQuantity, String cartCouponTitle, int cartPaintFinalPrice) {
+		this.cartItemId = cartItemId;
 		this.cartPaintName = cartPaintName;
 		this.cartPaintQuantity = cartPaintQuantity;
 		this.cartCouponTitle = cartCouponTitle;
 		this.cartPaintFinalPrice = cartPaintFinalPrice;
 	}
+	
+	public int getCartItemId() {
+		return cartItemId;
+	}
+
+	public void setCartItemId(int cartItemId) {
+		this.cartItemId = cartItemId;
+	}
+
 	public String getCartPaintName() {
 		return cartPaintName;
 	}
